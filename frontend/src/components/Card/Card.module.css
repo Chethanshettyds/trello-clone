@@ -1,0 +1,206 @@
+.card {
+  background-color: white;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cardDragging {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: rotate(3deg);
+}
+
+.cardTitle {
+  font-size: 14px;
+  color: #172b4d;
+  word-wrap: break-word;
+}
+
+.cardDescription {
+  margin-top: 8px;
+  color: #5e6c84;
+}
+
+.descIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #172b4d;
+  margin: 0;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modalTitle:hover {
+  background-color: #f4f5f7;
+}
+
+.modalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #172b4d;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.descriptionContent {
+  min-height: 80px;
+  padding: 12px;
+  background-color: #f4f5f7;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #172b4d;
+  transition: background-color 0.2s;
+}
+
+.descriptionContent:hover {
+  background-color: #ebecf0;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* 1. The Add Button (Vibrant Gradient) */
+.addBtn {
+  position: relative;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Bright Blue */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Pill shape */
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 13px;
+  overflow: hidden; /* For the shine effect */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+/* Add a subtle shine animation on hover */
+.addBtn:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  padding-right: 24px; /* Slightly widens the button on hover */
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+}
+
+/* 2. The Cancel Button (Minimalist Box) */
+.cancelBtn {
+  background: transparent;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background-color: #fff;
+  border-color: #cbd5e1; /* Adds a border on hover */
+  color: #0f172a;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Disabled State */
+.addBtn:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.addCardButton {
+  /* Layout */
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left; /* Aligns text naturally with the cards above */
+  margin-top: 8px;
+  
+  /* Typography */
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b; /* Muted Slate */
+  
+  /* The "Placeholder" Look */
+  background-color: transparent;
+  border: 2px dashed #e2e8f0; /* Dashed light gray border */
+  border-radius: 8px;
+  
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* Flexbox to align the + sign */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Hover Effect: Turns into a solid, actionable area */
+.addCardButton:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8; /* Border gets darker */
+  color: #334155; /* Text gets darker */
+}
+
+/* Active Click Effect */
+.addCardButton:active {
+  background-color: #f1f5f9;
+  border-style: solid; /* Lines become solid on click */
+  transform: scale(0.99); /* Slight press */
+}

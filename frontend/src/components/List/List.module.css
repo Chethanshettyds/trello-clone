@@ -1,0 +1,256 @@
+.list {
+  background-color: #ebecf0;
+  border-radius: 8px;
+  width: 272px;
+  min-width: 272px;
+  max-height: calc(100vh - 180px);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.listDragging {
+  opacity: 0.5;
+}
+
+.cardList {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+  margin: 4px 0;
+  min-height: 20px;
+  transition: background-color 0.2s;
+}
+
+.cardList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cardList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cardList::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.cardListDraggingOver {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.addCardButton {
+  width: 100%;
+  text-align: left;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: #5e6c84;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.addCardButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.addCardForm {
+  margin-top: 4px;
+}
+
+.addCardActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin-bottom: 4px;
+}
+
+.listTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #172b4d;
+  flex: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 0;
+  transition: background-color 0.2s;
+}
+
+.listTitle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.listMenu {
+  position: relative;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  color: #5e6c84;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.menuButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menuDropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 150px;
+  overflow: hidden;
+}
+
+.menuDropdown button {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #172b4d;
+  transition: background-color 0.2s;
+}
+
+.menuDropdown button:hover {
+  background-color: #f4f5f7;
+}
+
+.deleteOption {
+  color: #c62828 !important;
+}
+
+.addListButton {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 272px;
+  min-width: 272px;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.addListButton:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.addListForm {
+  background-color: #ebecf0;
+  border-radius: 8px;
+  width: 272px;
+  min-width: 272px;
+  padding: 8px;
+}
+
+.addListActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container: Aligns items with a bit of breathing room */
+.addListActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* 1. The Add Button (Solid, Dark, Crisp) */
+.addBtn {
+  background-color: #1e293b; /* Slate 800 - softer than pure black */
+  color: #ffffff;
+  border: 1px solid #1e293b;
+  border-radius: 6px; /* Slightly squared for a "tool" feel */
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.addBtn:hover {
+  background-color: #334155; /* Lighten slightly */
+  transform: translateY(-1px); /* Micro-lift */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.addBtn:active {
+  transform: translateY(0);
+}
+
+/* 2. The Cancel Button (Subtle & Smart) */
+.cancelBtn {
+  background: transparent;
+  color: #94a3b8; /* Muted gray */
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  
+  /* Flex to align the X icon if you added it */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cancelBtn:hover {
+  background-color: #f1f5f9; /* Very subtle background */
+  color: #ef4444; /* Turns red to indicate 'close' */
+}
+
+/* Disabled State */
+.addBtn:disabled {
+  background-color: #cbd5e1;
+  border-color: #cbd5e1;
+  color: #f1f5f9;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
