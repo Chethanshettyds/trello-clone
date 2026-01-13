@@ -81,8 +81,12 @@ const BoardHeader: React.FC<BoardHeaderProps> = ({ board }) => {
       )}
 
       <div className={styles.boardActions}>
-        <Button variant="ghost" onClick={() => setShowColorPicker(true)}>
-          <span style={{marginRight: '6px'}}>🎨</span>
+        <Button 
+          variant="ghost" 
+          onClick={() => setShowColorPicker(true)}
+          className={styles.bgButton}
+        >
+          <span style={{marginRight: '8px', fontSize: '18px'}}>🎨</span>
           Change Background
         </Button>
         <Button variant="danger" className={styles.deleteBtn} onClick={handleDelete}>

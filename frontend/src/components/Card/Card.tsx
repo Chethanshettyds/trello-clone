@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { Card as CardType } from '../../types';
 import styles from './Card.module.css';
@@ -9,7 +9,7 @@ interface CardProps {
   onClick: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ card, index, onClick }) => {
+const Card = memo<CardProps>(({ card, index, onClick }) => {
   return (
     <Draggable draggableId={card._id} index={index}>
       {(provided, snapshot) => (
@@ -32,6 +32,17 @@ const Card: React.FC<CardProps> = ({ card, index, onClick }) => {
       )}
     </Draggable>
   );
-};
+}, (prevProps, nextProps) => {
+  // Return true if props are equal (skip render), false otherwise (render)
+  return (
+    prevProps.card._id === nextProps.card._id &&
+    prevProps.card.title === nextProps.card.title &&
+    prevProps.card.description === nextProps.card.description &&
+    prevProps.index === nextProps.index &&
+    prevProps.onClick === nextProps.onClick
+  );
+});
+
+Card.displayName = 'Card';
 
 export default Card;

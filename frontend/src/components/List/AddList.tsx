@@ -19,18 +19,35 @@ const AddList: React.FC<AddListProps> = ({ boardId }) => {
     if (!title.trim()) return;
 
     try {
+      setIsAdding(false); // Close form immediately for better UX
       const listData: CreateListDto = {
         title: title.trim(),
         boardId
       };
 
+      console.log('Creating list with data:', listData);
       const newList = await listService.createList(listData);
-      addListToBoard({ ...newList, cards: [] });
+      console.log('List created successfully:', newList);
+      
+      // Ensure the list has all required properties
+      const listToAdd = {
+        _id: newList._id,
+        title: newList.title,
+        boardId: newList.boardId,
+        position: newList.position ?? 0,
+        cards: [] as any[],
+        createdAt: newList.createdAt,
+        updatedAt: newList.updatedAt
+      };
+      
+      console.log('Adding list to board:', listToAdd);
+      addListToBoard(listToAdd);
+      
       setTitle('');
-      setIsAdding(false);
     } catch (err) {
       console.error('Failed to create list:', err);
-      alert('Failed to create list');
+      setIsAdding(true); // Reopen form if there was an error
+      alert('Failed to create list. Please try again.');
     }
   };
 

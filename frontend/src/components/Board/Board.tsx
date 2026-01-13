@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useBoard } from '../../hooks/useBoard';
-import { BoardProvider } from '../../context/BoardContext';
+import { BoardProvider, useBoardContext } from '../../context/BoardContext';
 import { listService } from '../../services/listService';
 import { cardService } from '../../services/cardService';
 import { reorder, move } from '../../utils/helpers';
@@ -13,9 +13,10 @@ import Loader from '../common/Loader';
 import styles from './Board.module.css';
 
 const BoardContent: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const { board, loading, error, setBoard } = useBoard(id);
+  const { board, setBoard } = useBoardContext();
 
+  // Move all hooks before any conditional logic
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onDragEnd = useCallback(
     async (result: DropResult) => {
       const { destination, source, type } = result;
@@ -32,7 +33,10 @@ const BoardContent: React.FC = () => {
       if (type === 'LIST') {
         const reorderedLists = reorder(board.lists, source.index, destination.index);
         
-        setBoard({ ...board, lists: reorderedLists });
+        setBoard(prevBoard => {
+          if (!prevBoard) return prevBoard;
+          return { ...prevBoard, lists: reorderedLists };
+        });
 
         try {
           const listPositions = reorderedLists.map((list, index) => ({
@@ -54,11 +58,15 @@ const BoardContent: React.FC = () => {
         if (source.droppableId === destination.droppableId) {
           const reorderedCards = reorder(sourceList.cards, source.index, destination.index);
           
-          const newLists = board.lists.map(list =>
-            list._id === sourceList._id ? { ...list, cards: reorderedCards } : list
-          );
-
-          setBoard({ ...board, lists: newLists });
+          setBoard(prevBoard => {
+            if (!prevBoard) return prevBoard;
+            return {
+              ...prevBoard,
+              lists: prevBoard.lists.map(list =>
+                list._id === sourceList._id ? { ...list, cards: reorderedCards } : list
+              )
+            };
+          });
 
           try {
             const cardPositions = reorderedCards.map((card, index) => ({
@@ -71,7 +79,6 @@ const BoardContent: React.FC = () => {
             console.error('Failed to update card positions:', err);
           }
         } else {
-          // renamed variable from `result` to `moved` to avoid shadowing the outer `result` param
           const moved = move(
             sourceList.cards,
             destList.cards,
@@ -79,17 +86,21 @@ const BoardContent: React.FC = () => {
             destination
           );
 
-          const newLists = board.lists.map(list => {
-            if (list._id === source.droppableId) {
-              return { ...list, cards: moved[source.droppableId] };
-            }
-            if (list._id === destination.droppableId) {
-              return { ...list, cards: moved[destination.droppableId] };
-            }
-            return list;
+          setBoard(prevBoard => {
+            if (!prevBoard) return prevBoard;
+            return {
+              ...prevBoard,
+              lists: prevBoard.lists.map(list => {
+                if (list._id === source.droppableId) {
+                  return { ...list, cards: moved[source.droppableId] };
+                }
+                if (list._id === destination.droppableId) {
+                  return { ...list, cards: moved[destination.droppableId] };
+                }
+                return list;
+              })
+            };
           });
-
-          setBoard({ ...board, lists: newLists });
 
           try {
             const allCardPositions = [
@@ -111,20 +122,13 @@ const BoardContent: React.FC = () => {
         }
       }
     },
-    [board, setBoard]
+    [board]
   );
 
-  if (loading) {
-    return <Loader fullScreen />;
-  }
+  const memoizedLists = useMemo(() => board?.lists || [], [board?.lists]);
 
-  if (error || !board) {
-    return (
-      <div className={styles.error}>
-        <h2>Error</h2>
-        <p>{error || 'Board not found'}</p>
-      </div>
-    );
+  if (!board) {
+    return <Loader fullScreen />;
   }
 
   return (
@@ -139,7 +143,7 @@ const BoardContent: React.FC = () => {
               {...provided.droppableProps}
               className={styles.listsContainer}
             >
-              {board.lists.map((list, index) => (
+              {memoizedLists.map((list, index) => (
                 <List key={list._id} list={list} index={index} />
               ))}
               {provided.placeholder}
@@ -155,6 +159,19 @@ const BoardContent: React.FC = () => {
 const Board: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { board, loading, error, setBoard } = useBoard(id);
+
+  if (loading) {
+    return <Loader fullScreen />;
+  }
+
+  if (error || !board) {
+    return (
+      <div className={styles.error}>
+        <h2>Error</h2>
+        <p>{error || 'Board not found'}</p>
+      </div>
+    );
+  }
 
   return (
     <BoardProvider board={board} setBoard={setBoard}>

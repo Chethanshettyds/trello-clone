@@ -44,22 +44,23 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-black bg-opacity-50"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className={`relative bg-white rounded-lg shadow-xl ${sizeStyles[size]} w-full mx-4 max-h-[90vh] overflow-auto`}>
+      <div className={`relative bg-white rounded-2xl shadow-2xl ${sizeStyles[size]} w-full mx-4 max-h-[90vh] overflow-auto transition-all duration-300`}>
         {title && (
-          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <div className="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-gray-50 to-white">
+            <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+              className="flex items-center justify-center w-10 h-10 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-lg p-0 transition-all duration-200 transform hover:scale-110 active:scale-95 font-light text-3xl leading-none"
+              title="Close (Esc)"
             >
               ×
             </button>
           </div>
         )}
-        <div className="px-6 py-4">{children}</div>
+        <div className="px-8 py-6">{children}</div>
       </div>
     </div>
   );

@@ -61,12 +61,18 @@ export const BoardProvider: React.FC<BoardProviderProps> = ({ children, board, s
   };
 
   const addListToBoard = (list: List) => {
+    console.log('addListToBoard called with:', list);
     setBoard(prevBoard => {
-      if (!prevBoard) return null;
-      return {
+      if (!prevBoard) {
+        console.error('Cannot add list: board is null');
+        return null;
+      }
+      const updatedBoard = {
         ...prevBoard,
         lists: [...prevBoard.lists, list]
       };
+      console.log('Board updated with new list. New lists:', updatedBoard.lists);
+      return updatedBoard;
     });
   };
 

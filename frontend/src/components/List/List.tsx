@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { List as ListType, Card as CardType } from '../../types';
 import Card from '../Card/Card';
@@ -12,8 +12,16 @@ interface ListProps {
   index: number;
 }
 
-const List: React.FC<ListProps> = ({ list, index }) => {
+const List = memo<ListProps>(({ list, index }) => {
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
+
+  const handleCardClick = useCallback((card: CardType) => {
+    setSelectedCard(card);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setSelectedCard(null);
+  }, []);
 
   return (
     <>
@@ -42,7 +50,7 @@ const List: React.FC<ListProps> = ({ list, index }) => {
                       key={card._id}
                       card={card}
                       index={idx}
-                      onClick={() => setSelectedCard(card)}
+                      onClick={() => handleCardClick(card)}
                     />
                   ))}
                   {provided.placeholder}
@@ -59,11 +67,13 @@ const List: React.FC<ListProps> = ({ list, index }) => {
         <CardModal
           card={selectedCard}
           isOpen={!!selectedCard}
-          onClose={() => setSelectedCard(null)}
+          onClose={handleModalClose}
         />
       )}
     </>
   );
-};
+});
+
+List.displayName = 'List';
 
 export default List;

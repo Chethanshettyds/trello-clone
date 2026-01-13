@@ -1,16 +1,24 @@
 .list {
-  background-color: #ebecf0;
-  border-radius: 8px;
-  width: 272px;
-  min-width: 272px;
-  max-height: calc(100vh - 180px);
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  width: 320px;
+  min-width: 320px;
+  max-height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.list:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .listDragging {
   opacity: 0.5;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 .cardList {
@@ -18,9 +26,10 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 4px;
-  margin: 4px 0;
+  margin: 8px 0;
   min-height: 20px;
   transition: background-color 0.2s;
+  border-radius: 8px;
 }
 
 .cardList::-webkit-scrollbar {
@@ -32,64 +41,77 @@
 }
 
 .cardList::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.15);
   border-radius: 4px;
 }
 
+.cardList::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
 .cardListDraggingOver {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  background-color: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  border: 2px dashed #667eea;
 }
 
 .addCardButton {
   width: 100%;
   text-align: left;
-  padding: 8px;
+  padding: 12px;
   background: none;
   border: none;
-  color: #5e6c84;
+  color: #626f86;
   font-size: 14px;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .addCardButton:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(102, 126, 234, 0.08);
+  color: #667eea;
 }
 
 .addCardForm {
-  margin-top: 4px;
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
 }
 
 .addCardActions {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .listHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
-  margin-bottom: 4px;
+  padding: 12px 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .listTitle {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   color: #172b4d;
   flex: 1;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
   margin: 0;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  letter-spacing: -0.3px;
 }
 
 .listTitle:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
 }
 
 .listMenu {
@@ -99,16 +121,20 @@
 .menuButton {
   background: none;
   border: none;
-  color: #5e6c84;
+  color: #626f86;
   font-size: 20px;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menuButton:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
 }
 
 .menuDropdown {
@@ -116,11 +142,13 @@
   right: 0;
   top: 100%;
   background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 10;
-  min-width: 150px;
+  min-width: 160px;
   overflow: hidden;
+  margin-top: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .menuDropdown button {
@@ -132,54 +160,107 @@
   cursor: pointer;
   font-size: 14px;
   color: #172b4d;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .menuDropdown button:hover {
-  background-color: #f4f5f7;
+  background-color: #f1f3f5;
+  color: #667eea;
 }
 
 .deleteOption {
-  color: #c62828 !important;
+  color: #dc2626 !important;
+}
+
+.deleteOption:hover {
+  background-color: #fee2e2 !important;
 }
 
 .addListButton {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
   color: white;
-  border: none;
-  border-radius: 8px;
-  width: 272px;
-  min-width: 272px;
-  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  width: 320px;
+  min-width: 320px;
+  padding: 14px;
   text-align: left;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background-color 0.2s;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .addListButton:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .addListForm {
-  background-color: #ebecf0;
-  border-radius: 8px;
-  width: 272px;
-  min-width: 272px;
-  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  width: 320px;
+  min-width: 320px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .addListActions {
   display: flex;
+  align-items: center;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
+.addBtn {
+  background-color: #667eea;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
 
+.addBtn:hover {
+  background-color: #764ba2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
 
+.addBtn:active {
+  transform: translateY(0);
+}
 
+.cancelBtn {
+  background: transparent;
+  color: #94a3b8;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
 
+.cancelBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #172b4d;
+}
 
 
 
