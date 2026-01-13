@@ -17,12 +17,14 @@ connectDB();
 
 // CORS Configuration
 const allowedOrigins = [
-  'http://localhost:3000',              // Local development
-  process.env.FRONTEND_URL || 'https://telloo-cl.netlify.app' // Netlify frontend
-];
+  'http://localhost:3000',        // Local development
+  'https://azazza.netlify.app',   // Netlify frontend
+  process.env.FRONTEND_URL || ''  // Environment variable backup
+].filter(Boolean);
 
 app.use(cors({
   origin: function (origin, callback) {
+    console.log('Request from origin:', origin); // For debugging
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
