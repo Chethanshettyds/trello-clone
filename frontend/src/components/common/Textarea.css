@@ -1,0 +1,63 @@
+.textarea {
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #172b4d;
+  transition: all 0.2s ease;
+  background-color: white;
+  resize: vertical;
+  line-height: 1.6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1), 0 4px 12px rgba(102, 126, 234, 0.15);
+  background-color: white;
+}
+
+.textarea:hover {
+  border-color: #cbd5e1;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.textarea::placeholder {
+  color: #cbd5e1;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.textareaWrapper {
+  width: 100%;
+}
+
+.textareaLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.textareaError {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.fullWidth {
+  width: 100%;
+  display: block;
+}
+
+/* Focus animation */
+.textarea:focus::placeholder {
+  opacity: 0.8;
+  color: #a0aec0;
+}

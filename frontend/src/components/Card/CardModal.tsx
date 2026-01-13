@@ -65,18 +65,22 @@ const CardModal: React.FC<CardModalProps> = ({ card, isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="large">
       <div className={styles.modalContent}>
-        {isEditing ? (
-          <Input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            fullWidth
-            autoFocus
-          />
-        ) : (
-          <h2 className={styles.modalTitle} onClick={() => setIsEditing(true)}>
-            {card.title}
-          </h2>
-        )}
+        <div className={styles.titleSection}>
+          {isEditing ? (
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              fullWidth
+              isTitle
+              autoFocus
+            />
+          ) : (
+            <h2 className={styles.modalTitle} onClick={() => setIsEditing(true)}>
+              {card.title}
+              <span className={styles.editHint}>Click to edit</span>
+            </h2>
+          )}
+        </div>
 
         <div className={styles.modalSection}>
           <h3 className={styles.sectionTitle}>Description</h3>
@@ -93,34 +97,37 @@ const CardModal: React.FC<CardModalProps> = ({ card, isOpen, onClose }) => {
               className={styles.descriptionContent}
               onClick={() => setIsEditing(true)}
             >
-              {card.description || 'Add a more detailed description...'}
+              {card.description || 'Click to add a description...'}
+              {card.description && <span className={styles.editHint}>Click to edit</span>}
             </div>
           )}
         </div>
 
         <div className={styles.modalActions}>
-          <div>
-            {isEditing && (
-              <>
-                <Button onClick={handleSave} disabled={isSaving || !title.trim()}>
-                  {isSaving ? 'Saving...' : 'Save'}
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    setTitle(card.title);
-                    setDescription(card.description);
-                    setIsEditing(false);
-                  }}
-                  style={{ marginLeft: '8px' }}
-                >
-                  Cancel
-                </Button>
-              </>
-            )}
-          </div>
+          {isEditing && (
+            <div className={styles.editActions}>
+              <Button onClick={handleSave} disabled={isSaving || !title.trim()}>
+                {isSaving ? 'Saving...' : 'Save Changes'}
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setTitle(card.title);
+                  setDescription(card.description);
+                  setIsEditing(false);
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
+          )}
+          {!isEditing && (
+            <Button variant="secondary" size="small" onClick={() => setIsEditing(true)}>
+              ✏️ Edit
+            </Button>
+          )}
           <Button variant="danger" onClick={handleDelete}>
-            Delete Card
+            🗑️ Delete Card
           </Button>
         </div>
       </div>
