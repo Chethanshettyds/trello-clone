@@ -76,3 +76,6 @@ npm install
 
 # Create .env file
 echo "REACT_APP_API_URL=http://localhost:5000/api" > .env
+
+# Run frontend server
+npm start
