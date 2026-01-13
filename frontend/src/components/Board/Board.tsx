@@ -132,7 +132,7 @@ const BoardContent: React.FC = () => {
   }
 
   return (
-    <div className={styles.board} style={{ backgroundColor: board.backgroundColor }}>
+    <div className={styles.board} style={{ background: board.backgroundColor }}>
       <BoardHeader board={board} />
 
       <DragDropContext onDragEnd={onDragEnd}>
