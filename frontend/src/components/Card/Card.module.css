@@ -221,9 +221,54 @@
   background-color: #f8fafc;
   border-color: #94a3b8; /* Border gets darker */
   color: #334155; /* Text gets darker */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Active Click Effect */
+.addCardButton:active {
+  background-color: #f1f5f9;
+  border-style: solid; /* Lines become solid on click */
+  transform: scale(0.99); /* Slight press */
+}
+
+.addCardForm {
+  padding: 12px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  margin-top: 8px;
+  animation: slideInUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.addCardActions {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addBtn {
+  flex-shrink: 0;
+}
+
+.cancelBtn {
+  flex-shrink: 0;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}/* Active Click Effect */
 .addCardButton:active {
   background-color: #f1f5f9;
   border-style: solid; /* Lines become solid on click */

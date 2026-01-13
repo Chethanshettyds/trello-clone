@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { CreateCardDto } from '../../types';
 import { cardService } from '../../services/cardService';
 import { useBoardContext } from '../../context/BoardContext';
@@ -13,7 +13,24 @@ interface AddCardProps {
 const AddCard: React.FC<AddCardProps> = ({ listId }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [title, setTitle] = useState('');
+  const formRef = useRef<HTMLDivElement>(null);
   const { addCardToList } = useBoardContext();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (formRef.current && !formRef.current.contains(event.target as Node)) {
+        setIsAdding(false);
+        setTitle('');
+      }
+    };
+
+    if (isAdding) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isAdding]);
 
   const handleAdd = async () => {
     if (!title.trim()) return;
@@ -43,7 +60,7 @@ const AddCard: React.FC<AddCardProps> = ({ listId }) => {
   }
 
   return (
-    <div className={styles.addCardForm}>
+    <div ref={formRef} className={styles.addCardForm}>
       <Textarea
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -60,27 +77,27 @@ const AddCard: React.FC<AddCardProps> = ({ listId }) => {
       />
       <div className={styles.addCardActions}>
         <div className={styles.actionRow}>
-  <Button 
-    size="small" 
-    className={styles.addBtn} /* Add this class */
-    onClick={handleAdd} 
-    disabled={!title.trim()}
-  >
-    Add Card
-  </Button>
-  
-  <Button
-    size="small"
-    variant="ghost" /* We will customize this variant styling below */
-    className={styles.cancelBtn} /* Add this class */
-    onClick={() => {
-      setIsAdding(false);
-      setTitle('');
-    }}
-  >
-    Cancel
-  </Button>
-</div>
+          <Button 
+            size="small" 
+            className={styles.addBtn}
+            onClick={handleAdd} 
+            disabled={!title.trim()}
+          >
+            Add Card
+          </Button>
+          
+          <Button
+            size="small"
+            variant="ghost"
+            className={styles.cancelBtn}
+            onClick={() => {
+              setIsAdding(false);
+              setTitle('');
+            }}
+          >
+            Cancel
+          </Button>
+        </div>
       </div>
     </div>
   );
