@@ -15,9 +15,23 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
+// CORS Configuration
+const allowedOrigins = [
+  'http://localhost:3000',              // Local development
+  process.env.FRONTEND_URL || 'https://telloo-cl.netlify.app' // Netlify frontend
+];
+
 app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
